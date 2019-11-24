@@ -26,6 +26,7 @@ public class Main extends Application {
     List<Tower> towerList = new ArrayList<>();
     List<Tank> tankList = new ArrayList<>();
     List<Tank> tanks = new ListTank().tanks();
+    List<Button> buttonList = new ArrayList<>();
     CreateTower createTower = new CreateTower();
     CreateBullet createBullet = new CreateBullet();
     GraphicsContext gc;
@@ -44,7 +45,6 @@ public class Main extends Application {
 
 
     public void start(Stage stage) throws Exception{
-
         Button button1 = new Button("Normal");
         button1.setPrefWidth(60);
         button1.setLayoutX(100);
@@ -79,9 +79,20 @@ public class Main extends Application {
         Button buttonAgain = new Button("Play Again");
         buttonAgain.setLayoutX(350);
         buttonAgain.setLayoutY(670);
+        Button pause = new Button("Pause");
+        pause.setPrefWidth(60);
+        pause.setLayoutX(430);
+        pause.setLayoutY(670);
+        Button resume = new Button("Resume");
+        resume.setLayoutY(670);
+        resume.setLayoutX(500);
 
         Canvas canvas = new Canvas(700,650);
         gc = canvas.getGraphicsContext2D();
+        Button start = new Button();
+        start.setLayoutX(400);start.setLayoutY(250);
+        start.setPrefWidth(200);start.setPrefHeight(100);
+        start.setOpacity(1.0);
 
         Group group = new Group();
         if(flag == 1){
@@ -90,7 +101,7 @@ public class Main extends Application {
             imageView.setY(200);
             group.getChildren().add(imageView);
         }
-        group.getChildren().addAll(canvas, textCoin,textHealth,button1,button2,button3,button,iv1,iv2,iv3,buttonAgain);
+        group.getChildren().addAll(canvas, textCoin,textHealth,button1,button2,button3,button,iv1,iv2,iv3,buttonAgain,pause,resume);
 
         Scene scene1 = new Scene(group,700,750);
 
@@ -98,17 +109,29 @@ public class Main extends Application {
         stage.setScene(scene1);
         stage.setTitle("Tower Defense");
         stage.show();
-        PauseTransition pause = new PauseTransition();
 
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
+
                 if(flag == 1){
                     drawLose(gc);
                 }
                 if(flag == 2){
                     drawWin(gc);
                 }
+                pause.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        flag = -1;
+                    }
+                });
+                resume.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        flag = 0;
+                    }
+                });
                 buttonAgain.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
@@ -260,6 +283,9 @@ public class Main extends Application {
         };
         timer.start();
 
+    }
+    public void drawGame(GraphicsContext gc){
+        gc.drawImage(new Image("./Image/Start.png"),0,0);
     }
     public void drawWin(GraphicsContext gc){
         gc.drawImage(new Image("./win.jpg"),150,200);
