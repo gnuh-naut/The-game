@@ -16,7 +16,6 @@ public class Tank implements Health {
     public int width,height;
     public String text;
     public Image image;
-//    public ImageView imageView;
     public double attack;
     public Direction direction;
     public double x;
@@ -25,21 +24,6 @@ public class Tank implements Health {
     public int wayPointIndex = 0;
     public ListPoint points = new ListPoint();
     public double spaceHealth;
-
-//    public Tank(){
-//    }
-//
-//    public Tank(double speed, double health, String text, int width, int height, double attack) {
-//        this.speed = speed*2;
-//        this.health = health;
-//        image = new Image(text, width, height, true, true);
-//        imageView = new ImageView(image);
-//        this.attack = attack;
-//        this.x = 0;
-//        this.y = 185;
-//        this.direction = Direction.Right;
-//        this.reward = 20;
-//    }
 
     public void subHealth(double damage){
         this.health = this.health - damage;

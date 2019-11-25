@@ -28,8 +28,8 @@ public class Bullet extends X_y {
     public void update() {
         if (Math.abs(x-tank.x + y-tank.y) < 20)  hit = true;
 
-        x += Math.round( (double)(tank.x-x)*speed/Math.abs(tank.x-x + tank.y-y) );
-        y += Math.round( (double)(tank.y-y)*speed/Math.abs(tank.x-x + tank.y-y) );
+        x += Math.round( (tank.x-x)*speed/Math.abs(tank.x-x + tank.y-y) );
+        y += Math.round( (tank.y-y)*speed/Math.abs(tank.x-x + tank.y-y) );
     }
 }
 

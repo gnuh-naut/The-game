@@ -1,5 +1,4 @@
 import javafx.animation.AnimationTimer;
-import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -39,7 +38,7 @@ public class Main extends Application {
     int flag1 = 0;
     int flag2 = 0;
     int flag3 = 0;
-    int flag = 0;
+    int flag = -1;
     int again = 0;
 
 
@@ -86,6 +85,11 @@ public class Main extends Application {
         Button resume = new Button("Resume");
         resume.setLayoutY(670);
         resume.setLayoutX(500);
+        Button start1 = new Button("Start");
+        start1.setLayoutX(570);
+        start1.setLayoutY(660);
+        start1.setPrefWidth(70);
+        start1.setPrefHeight(70);
 
         Canvas canvas = new Canvas(700,650);
         gc = canvas.getGraphicsContext2D();
@@ -101,7 +105,7 @@ public class Main extends Application {
             imageView.setY(200);
             group.getChildren().add(imageView);
         }
-        group.getChildren().addAll(canvas, textCoin,textHealth,button1,button2,button3,button,iv1,iv2,iv3,buttonAgain,pause,resume);
+        group.getChildren().addAll(canvas, textCoin,textHealth,button1,button2,button3,button,iv1,iv2,iv3,buttonAgain,pause,resume,start1);
 
         Scene scene1 = new Scene(group,700,750);
 
@@ -111,9 +115,19 @@ public class Main extends Application {
         stage.show();
 
         AnimationTimer timer = new AnimationTimer() {
+
             @Override
             public void handle(long l) {
+                if(flag == -1){
+                    drawGame(gc);
+                }
+                start1.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        flag = 0;
+                    }
+                });
                 if(flag == 1){
                     drawLose(gc);
                 }
@@ -285,7 +299,7 @@ public class Main extends Application {
 
     }
     public void drawGame(GraphicsContext gc){
-        gc.drawImage(new Image("./Image/Start.png"),0,0);
+        gc.drawImage(new Image("./Image/nen.png"),0,100);
     }
     public void drawWin(GraphicsContext gc){
         gc.drawImage(new Image("./win.jpg"),150,200);
